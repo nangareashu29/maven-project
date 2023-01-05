@@ -6,6 +6,6 @@ pipeline {
 	    stage('execute unit test framework')
 	    {steps {withMaven(globalMavenSettingsConfig: '--- Use system default settings or file path ---', jdk: 'JDK_HOME', maven: 'MAVEAN_HOME', mavenSettingsConfig: '--- Use system default settings or file path ---') {
     // some block
-}}
+}}}
 	}
 	}
