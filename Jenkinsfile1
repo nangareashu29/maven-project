@@ -7,12 +7,12 @@ pipeline {
 	    {steps {withMaven(globalMavenSettingsConfig: '6459bc23-432b-4d77-871f-920eb8e310c7', jdk: 'JDK_HOME', maven: 'MAVEAN_HOME', mavenSettingsConfig: 'cf88886e-bb8c-4929-8b97-a6eb102e4bdc') {
     //sh 'mvn test'
 }}}
-	    stage('create deployable package')
-	    {steps {withMaven(globalMavenSettingsConfig: '6459bc23-432b-4d77-871f-920eb8e310c7', jdk: 'JDK_HOME', maven: 'MAVEAN_HOME', mavenSettingsConfig: 'cf88886e-bb8c-4929-8b97-a6eb102e4bdc') {
-    //sh 'mvn clean package'
-}}}
-
+	stage('sonar analysis & code build')
+	{steps{withSonarQubeEnv(credentialsId: 'sonar') {
+    withMaven(globalMavenSettingsConfig: '6459bc23-432b-4d77-871f-920eb8e310c7', jdk: 'JDK_HOME', maven: 'MAVEAN_HOME', mavenSettingsConfig: 'cf88886e-bb8c-4929-8b97-a6eb102e4bdc') {
+   { sh 'mvn clean package sonar:sonar'}
 }
+}}}	
 	stage('deploy-to-dev')
 	{steps{sshagent(['6399fcce-d1d7-46b2-a4c7-4f81a122347d']) {
     sh 'ssh -o StrictHostKeyChecking=no */target/*.war ec2-user@ip-172-31-2-100:/var/lib/tomcat/webapps'
