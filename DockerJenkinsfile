@@ -13,5 +13,6 @@ stages
 
 {stage {'docker build or create image'}
 {steps {sh 'docker build -t ashu2903/mavenwebapp:01 .'}}
+}
 }}
 
