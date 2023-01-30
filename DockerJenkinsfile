@@ -10,5 +10,7 @@ stage {'code build'}
 {withMaven(globalMavenSettingsConfig: '89e6562c-2cb2-45cf-94f6-6eb4ccbb9960', jdk: 'JDK-Home', maven: 'Home-Maven', mavenSettingsConfig: '2f16ad63-ed10-4030-bfaa-1f15dacf8513') {
    sh 'mvn clean package'
 }}
+stage {'docker build or create image'}
+{steps {sh 'docker build -t ashu2903/mavenwebapp:01 .'}}
 }
 }
