@@ -14,3 +14,4 @@ stage {'code build'}
 {steps {sh 'docker build -t ashu2903/mavenwebapp:01 .'}}
 }
 }
+}
