@@ -1,0 +1,16 @@
+pipeline
+{
+agent any
+stages
+{stage {'scm checkout'}
+{steps{'git branch: 'master', url: https://github.com/nangareashu29/maven-project'}}
+
+{stage {'code build'}
+{withMaven(globalMavenSettingsConfig: 'c54abf24-fbc7-4773-8cfa-e892d7c1b703', jdk: 'Java_Home', maven: 'Home_Maven', mavenSettingsConfig: 'e6b5e703-d11b-44b5-9162-d62bcf1b1a3f') 
+{sh 'mvn clean package'}
+}}
+
+{stage {'docker build or create image'}
+{steps {sh 'docker build -t 518238274611.dkr.ecr.ap-northeast-1.amazonaws.com/kubernate-ecr:latest .'}}
+}
+}}
