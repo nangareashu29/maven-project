@@ -15,3 +15,4 @@ stage ('code build')
 stage ('docker build or create image')
 {steps {sh 'docker build -t 518238274611.dkr.ecr.ap-northeast-1.amazonaws.com/kubernate-ecr:latest .'}
 }}
+}
